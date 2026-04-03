@@ -1,4 +1,13 @@
-canvas {
-    margin: 10%;
+canvas{
+    
     border: 5px solid black;
+}
+.palette{
+    margin: 10px;
+}
+.selected{
+    border: 1px solid red;
+}
+main {
+    margin: 10%;
 }
