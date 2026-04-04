@@ -156,7 +156,16 @@ class Offgrid{
 
                 var pattern = this.getDisplayPattern(x, y);
                 //console.log(pattern);
-
+                var useSpecificTile = false;
+                var specificTile = null;
+                for(var tile of detailedTileDict){
+                    if(tile.checkPatternLoose(pattern[0], pattern[1], pattern[2], pattern[3])){
+                        useSpecificTile = true;;
+                        // console.log(tile);
+                        specificTile = tile;
+                        break;
+                    }
+                }
                 for(var i = 1; i < tileLayers; i++){
                     var layerPattern = new Array();
                     pattern.forEach(e => {
@@ -173,6 +182,10 @@ class Offgrid{
                         }
                     });
                 }
+                if(useSpecificTile){
+                    specificTile.draw(ctx, x, y);
+                }
+                
 
                 //console.log(this.getDisplayTile(x,y) + ": " + x + " " + y);
                 // if(this.getDisplayTile(x,y) == undefined || this.getDisplayTile(x,y) == -1){
@@ -182,8 +195,8 @@ class Offgrid{
 
                 // }
 
-                //ctx.strokeStyle = "black";
-                //ctx.strokeRect(x * tileSize, y * tileSize, tileSize, tileSize);
+                // ctx.strokeStyle = "black";
+                // ctx.strokeRect(x * tileSize, y * tileSize, tileSize, tileSize);
             }
         }
 
@@ -225,5 +238,6 @@ document.getElementById("palette").appendChild(palette3);
 var palette4 = tileDict[3].image;
 palette4.addEventListener("click", e => paletteClick(4, palette4));
 document.getElementById("palette").appendChild(palette4);
+
 
 paletteClick(1, palette1);

@@ -52,6 +52,7 @@ class Tile{
 }
 
 var tileDict = [];
+var detailedTileDict = [];
 
 function addTile(fileName, rotation, pattern){
     tileDict.push(new Tile("Tile Images/"+fileName, rotation, pattern));
@@ -59,6 +60,16 @@ function addTile(fileName, rotation, pattern){
 function addTileRotated(fileName, numRotations, pattern){
     for(var i=0; i<numRotations; i++){
         addTile(fileName, i * 90, pattern);
+        pattern.unshift(pattern.pop());
+    }
+}
+
+function addDetailedTile(fileName, rotation, pattern){
+    detailedTileDict.push(new Tile("Tile Images/"+fileName, rotation, pattern));
+}
+function addDetailedTileRotated(fileName, numRotations, pattern){
+    for(var i=0; i<numRotations; i++){
+        addDetailedTile(fileName, i * 90, pattern);
         pattern.unshift(pattern.pop());
     }
 }
@@ -91,6 +102,15 @@ addTileRotated("OffgridTiles_09.png", 4, new Array(4, 4, 4, 0));
 addTileRotated("OffgridTiles_10.png", 2, new Array(0, 4, 0, 4));
 addTileRotated("OffgridTiles_11.png", 4, new Array(0, 4, 4, 0));
 
+//tile Overlay pieces
+//Plains and Deep Water w/ Cliff Borders
+addDetailedTileRotated("OffgridTiles_20.png", 4, new Array(1, 3, 1, 0));
+addDetailedTileRotated("OffgridTiles_21.png", 4, new Array(3, 0, 3, 1));
+addDetailedTileRotated("OffgridTiles_22.png", 2, new Array(1, 3, 1, 3));
+addDetailedTileRotated("OffgridTiles_23.png", 4, new Array(1, 3, 3, 1));
+
+addDetailedTileRotated("OffgridTiles_24.png", 4, new Array(0, 0, 3, 1));
+addDetailedTileRotated("OffgridTiles_25.png", 4, new Array(0, 0, 1, 3));
 
 
 //plains w/ forest
