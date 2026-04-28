@@ -5,10 +5,11 @@
     <body>
         <main>
             <div id="controls" class="controls">
-                <input type="text" id="width" class="width"></input>
-                <input type="text"  id="height" class="height"></input>
+                <input type="text" id="width" class="width" pattern="[0-9]"></input>
+                <input type="text"  id="height" class="height" pattern="[0-9]"></input>
+                <button id="newMap">Generate New Map</button>
             </div>
-            <canvas id="mainCanvas" class="mainCanvas" width="800" height="500"></canvas>
+            <canvas id="mainCanvas" class="mainCanvas"></canvas>
             <div id="palette" class="palette"></div>
         </main>
     </body>

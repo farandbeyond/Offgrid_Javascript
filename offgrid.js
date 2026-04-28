@@ -15,7 +15,10 @@ class Offgrid{
             }
         }
 
-        var canvas = document.getElementById("mainCanvas");
+        var oldCanvas = document.getElementById("mainCanvas");
+        var canvas = oldCanvas.cloneNode(true); // 'true' means deep clone (includes children)
+        oldCanvas.parentNode.replaceChild(canvas, oldCanvas);
+
         canvas.addEventListener("click", e => {
             this.placeTile(e);
         });
@@ -23,10 +26,14 @@ class Offgrid{
         canvas.addEventListener("mouseup", e => {this.dragging = false;});
         canvas.addEventListener("mousemove", e => {
             if(!this.dragging) return;
-            console.log("Dragging");
             this.placeTile(e);
-            this.drawCanvas();
         });
+
+        console.log(canvas);
+
+        
+        // canvas.width = 100;
+        // canvas.scrollHeight = tilesTall * tileSize;
     }
 
     placeTile(mouseEvent){
@@ -147,6 +154,7 @@ class Offgrid{
         var canvas = document.getElementById("mainCanvas");
         canvas.width = (this.width + 1) * tileSize;
         canvas.height = (this.height + 1) * tileSize;
+        console.log(this.width);
         const ctx = canvas.getContext("2d");
 
         //for each tile, draw the tile within the dictionary whose ID matches our display list
@@ -192,6 +200,14 @@ class Offgrid{
 var grid = new Offgrid(8, 5, 1);
 console.log(grid);
 grid.drawCanvas();
+//setting up the controls
+document.getElementById("newMap").addEventListener("click", e => {
+    var width = parseInt(document.getElementById("width").value);
+    var height = parseInt(document.getElementById("height").value);
+    grid = new Offgrid(width, height, 1);
+    console.log(grid);
+    grid.drawCanvas();
+});
 
 //setting up the palette
 function paletteClick(value, clickedNode){
@@ -216,6 +232,8 @@ document.getElementById("palette").appendChild(palette3);
 var palette4 = tileDict[3].image;
 palette4.addEventListener("click", e => paletteClick(4, palette4));
 document.getElementById("palette").appendChild(palette4);
+
+
 
 
 paletteClick(1, palette1);
