@@ -200,6 +200,7 @@ class Offgrid{
 var grid = new Offgrid(8, 5, 1);
 console.log(grid);
 grid.drawCanvas();
+
 //setting up the controls
 document.getElementById("newMap").addEventListener("click", e => {
     var width = parseInt(document.getElementById("width").value);
@@ -207,6 +208,24 @@ document.getElementById("newMap").addEventListener("click", e => {
     grid = new Offgrid(width, height, 1);
     console.log(grid);
     grid.drawCanvas();
+});
+
+document.getElementById("loadMap").addEventListener("click", e => {
+    var mapString = document.getElementById("mapString").value;
+    console.log(mapString);
+    for(var i=0;i<mapString.length;i++){
+        grid.tileIDs[i] = mapString[i];
+    }
+    grid.drawCanvas();
+});
+document.getElementById("saveMap").addEventListener("click", e => {
+    var mapString = "";
+    
+    for(var i=0;i<grid.tileIDs.length;i++){
+        mapString += grid.tileIDs[i];
+    }
+    console.log(mapString);
+    document.getElementById("mapString").value = mapString;
 });
 
 //setting up the palette
