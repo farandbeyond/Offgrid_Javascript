@@ -11,7 +11,7 @@ class Offgrid{
         this.displayTiles = [tilesWide + 1 * tilesTall + 1];
         for(var x = 0; x < tilesWide; x++){
             for(var y = 0; y < tilesTall; y++){
-                this.setDataTile(x, y, 0);
+                this.setDataTile(x, y, tWall);
             }
         }
 
@@ -51,7 +51,7 @@ class Offgrid{
             if(mouseEvent.detail <= 1){
                 this.setDataTile(tileX, tileY, paintID);
             }else if(mouseEvent.detail > 1){
-                this.setDataTile(tileX, tileY, 0);
+                this.setDataTile(tileX, tileY, tWild);
             }
             this.drawCanvas();
     }
@@ -154,7 +154,6 @@ class Offgrid{
         var canvas = document.getElementById("mainCanvas");
         canvas.width = (this.width + 1) * tileSize;
         canvas.height = (this.height + 1) * tileSize;
-        console.log(this.width);
         const ctx = canvas.getContext("2d");
 
         //for each tile, draw the tile within the dictionary whose ID matches our display list
@@ -167,19 +166,19 @@ class Offgrid{
                 var specificTile = null;
                 for(var tile of detailedTileDict){
                     if(tile.checkPatternLoose(pattern[0], pattern[1], pattern[2], pattern[3])){
-                        useSpecificTile = true;;
+                        useSpecificTile = true;
                         // console.log(tile);
                         specificTile = tile;
                         break;
                     }
                 }
-                for(var i = 1; i < tileLayers; i++){
+                for(var i = 0; i < tileLayers.length; i++){
                     var layerPattern = new Array();
                     pattern.forEach(e => {
-                        if(e == i){
-                            layerPattern.push(i);
+                        if(e == tileLayers[i]){
+                            layerPattern.push(e);
                         }else{
-                            layerPattern.push(0);
+                            layerPattern.push(tWild);
                         }
                     });
                     tileDict.forEach(e => {
@@ -197,7 +196,7 @@ class Offgrid{
     }
 }
 
-var grid = new Offgrid(8, 5, 1);
+var grid = new Offgrid(8, 5, tFloor);
 console.log(grid);
 grid.drawCanvas();
 
@@ -205,7 +204,7 @@ grid.drawCanvas();
 document.getElementById("newMap").addEventListener("click", e => {
     var width = parseInt(document.getElementById("width").value);
     var height = parseInt(document.getElementById("height").value);
-    grid = new Offgrid(width, height, 1);
+    grid = new Offgrid(width, height, tFloor);
     console.log(grid);
     grid.drawCanvas();
 });
@@ -237,22 +236,19 @@ function paletteClick(value, clickedNode){
     clickedNode.setAttribute("class", "selected");
 }
 var palette1 = tileDict[0].image;
-palette1.addEventListener("click", e => paletteClick(1, palette1));
+palette1.addEventListener("click", e => paletteClick(tFloor, palette1));
 document.getElementById("palette").appendChild(palette1);
 
 var palette2 = tileDict[1].image;
-palette2.addEventListener("click", e => paletteClick(2, palette2));
+palette2.addEventListener("click", e => paletteClick(tWater, palette2));
 document.getElementById("palette").appendChild(palette2);
 
 var palette3 = tileDict[2].image;
-palette3.addEventListener("click", e => paletteClick(3, palette3));
+palette3.addEventListener("click", e => paletteClick(tDeep, palette3));
 document.getElementById("palette").appendChild(palette3);
 
 var palette4 = tileDict[3].image;
-palette4.addEventListener("click", e => paletteClick(4, palette4));
+palette4.addEventListener("click", e => paletteClick(tWall, palette4));
 document.getElementById("palette").appendChild(palette4);
 
-
-
-
-paletteClick(1, palette1);
+paletteClick(tFloor, palette1);
