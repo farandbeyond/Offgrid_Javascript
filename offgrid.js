@@ -19,10 +19,18 @@ class Offgrid{
         canvas.addEventListener("click", e => {
             this.placeTile(e);
         });
+        canvas.addEventListener("mousedown", e => {this.dragging = true;});
+        canvas.addEventListener("mouseup", e => {this.dragging = false;});
+        canvas.addEventListener("mousemove", e => {
+            if(!this.dragging) return;
+            console.log("Dragging");
+            this.placeTile(e);
+            this.drawCanvas();
+        });
     }
 
     placeTile(mouseEvent){
-        
+
             //since we are modifying the offset grid, add half the tilesize
             var clickX = mouseEvent.offsetX - tileSize / 2;
             var clickY = mouseEvent.offsetY - tileSize / 2;
@@ -33,7 +41,7 @@ class Offgrid{
 
 
             //this.setDisplayTile(tileX, tileY, this.getDisplayTile(tileX, tileY) + 1);
-            if(mouseEvent.detail == 1){
+            if(mouseEvent.detail <= 1){
                 this.setDataTile(tileX, tileY, paintID);
             }else if(mouseEvent.detail > 1){
                 this.setDataTile(tileX, tileY, 0);
