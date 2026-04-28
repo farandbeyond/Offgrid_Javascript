@@ -11,3 +11,10 @@ canvas{
 main {
     margin: 10%;
 }
+.controls{
+    padding: 1%;
+}
+.controls *{
+    max-width: 50px;
+    max-height: 20px;
+}

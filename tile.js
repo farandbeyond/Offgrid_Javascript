@@ -1,4 +1,4 @@
-const tileSize = 64;
+const tileSize = 32;
 const tileLayers = 5;
 class Tile{
     constructor(imageURL, rotation, pattern){
@@ -43,10 +43,10 @@ class Tile{
             ctx.rotate(this.radians); // Rotate canvas
             ctx.translate(tileSize/2, tileSize/2);
             // Draw image centered at (0,0) of the new coordinate system
-            ctx.drawImage(this.image, -tileSize, -tileSize);
+            ctx.drawImage(this.image, -tileSize, -tileSize, tileSize, tileSize);
             ctx.restore(); // Restore original state
         }else{
-            ctx.drawImage(this.image, posX * tileSize, posY * tileSize);
+            ctx.drawImage(this.image, posX * tileSize, posY * tileSize, tileSize, tileSize);
         }
     }
 }
