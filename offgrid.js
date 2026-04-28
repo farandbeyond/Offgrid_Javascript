@@ -40,7 +40,7 @@ class Offgrid{
 
             //since we are modifying the offset grid, add half the tilesize
             var clickX = mouseEvent.offsetX - tileSize / 2;
-            var clickY = mouseEvent.offsetY - tileSize / 2;
+            var clickY = (document.getElementById("mainCanvas").height - mouseEvent.offsetY) - tileSize / 2;
 
             
             var tileX = Math.floor(clickX / tileSize);
@@ -141,10 +141,10 @@ class Offgrid{
     }
     getDisplayPattern(xPos, yPos){
         var pattern = new Array(
-            this.getDataTile(xPos - 1, yPos- 1),
-            this.getDataTile(xPos, yPos - 1),
+            this.getDataTile(xPos - 1, yPos),
             this.getDataTile(xPos, yPos),
-            this.getDataTile(xPos - 1, yPos)
+            this.getDataTile(xPos, yPos - 1),
+            this.getDataTile(xPos - 1, yPos - 1)
         );
 
         return pattern;
@@ -184,13 +184,13 @@ class Offgrid{
                     });
                     tileDict.forEach(e => {
                         if(e.checkPattern(layerPattern[0], layerPattern[1], layerPattern[2], layerPattern[3])){
-                            e.draw(ctx, x, y);
+                            e.draw(ctx, x, y, this.height);
                             return;
                         }
                     });
                 }
                 if(useSpecificTile){
-                    specificTile.draw(ctx, x, y);
+                    specificTile.draw(ctx, x, y, this.height);
                 }
             }
         }
