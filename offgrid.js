@@ -14,13 +14,6 @@ class Offgrid{
                 this.setDataTile(x, y, 0);
             }
         }
-        
-        
-        // for(var x = 0; x < tilesWide + 1; x++){
-        //     for(var y = 0; y < tilesTall + 1; y++){
-        //         this.displayTiles[y * (tilesWide + 1) + x] = -1;
-        //     }
-        // }
 
         var canvas = document.getElementById("mainCanvas");
         canvas.addEventListener("click", e => {
@@ -29,9 +22,7 @@ class Offgrid{
     }
 
     placeTile(mouseEvent){
-            //console.log("Clicked");
-            //console.log(e);
-            
+        
             //since we are modifying the offset grid, add half the tilesize
             var clickX = mouseEvent.offsetX - tileSize / 2;
             var clickY = mouseEvent.offsetY - tileSize / 2;
@@ -185,29 +176,8 @@ class Offgrid{
                 if(useSpecificTile){
                     specificTile.draw(ctx, x, y);
                 }
-                
-
-                //console.log(this.getDisplayTile(x,y) + ": " + x + " " + y);
-                // if(this.getDisplayTile(x,y) == undefined || this.getDisplayTile(x,y) == -1){
-                //     ctx.fillStyle = "white";
-                //     ctx.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
-                // }else{
-
-                // }
-
-                // ctx.strokeStyle = "black";
-                // ctx.strokeRect(x * tileSize, y * tileSize, tileSize, tileSize);
             }
         }
-
-        // for(var x = 0; x < this.width; x++){
-        //     for(var y = 0; y < this.height; y++){
-        //         ctx.strokeStyle = "black";
-        //         ctx.strokeRect(x * tileSize + tileSize / 2, y * tileSize + tileSize / 2, tileSize, tileSize);
-        //         ctx.strokeText(this.getDataTile(x, y), x * tileSize + tileSize, y * tileSize + tileSize + 5);
-        //     }
-        // }
-
     }
 }
 
