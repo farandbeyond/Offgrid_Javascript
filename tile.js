@@ -26,10 +26,10 @@ class Tile{
     }
 
     checkPatternLoose(TL, TR, BR, BL){
-        if(this.pTL != TL && this.pTL != tWild) return false;
-        if(this.pTR != TR && this.pTR != tWild) return false;
-        if(this.pBR != BR && this.pBR != tWild) return false;
-        if(this.pBL != BL && this.pBL != tWild) return false;
+        if(this.pTL != TL && this.pTL != t_Wild) return false;
+        if(this.pTR != TR && this.pTR != t_Wild) return false;
+        if(this.pBR != BR && this.pBR != t_Wild) return false;
+        if(this.pBL != BL && this.pBL != t_Wild) return false;
 
         return true;
     }
@@ -78,52 +78,61 @@ function addDetailedTileRotated(fileName, numRotations, pattern){
 }
 
 //0 is null, 1 is plains, 2 is shallow water, 3 is deep water, 4 is forest
-const tWild = '@';
+const t_Wild = '@';
 
 const tFloor = '0';
-const tWall = '1';
+const tWalls = 'W';
 const tWater = 'w';
-const tDeep = 'W'
+const tDeepW = 'x';
+const tMuddy = 'H';
 
 
-const tileLayers = [tFloor, tWall, tWater, tDeep, tWild];
+const tileLayers = [tFloor, tWalls, tWater, tDeepW, tMuddy, t_Wild];
 
 
 //basic full tiles
-addTileRotated("OffgridTiles_00.png", 1, new Array(tFloor, tFloor, tFloor, tFloor));
-addTileRotated("OffgridTiles_03.png", 1, new Array(tWater, tWater, tWater, tWater));
-addTileRotated("OffgridTiles_02.png", 1, new Array(tDeep, tDeep, tDeep, tDeep));
-addTileRotated("OffgridTiles_01.png", 1, new Array(tWall, tWall, tWall, tWall));
+
 //plains w/ null
-addTileRotated("OffgridTiles_04.png", 4, new Array(tWild, tFloor, tWild, tWild));
-addTileRotated("OffgridTiles_05.png", 4, new Array(tFloor, tFloor, tFloor, tWild));
-addTileRotated("OffgridTiles_06.png", 2, new Array(tWild, tFloor, tWild, tFloor));
-addTileRotated("OffgridTiles_07.png", 4, new Array(tWild, tFloor, tFloor, tWild));
+addTileRotated("OffgridTiles_00.png", 1, new Array(tFloor, tFloor, tFloor, tFloor));
+addTileRotated("OffgridTiles_01.png", 4, new Array(t_Wild, tFloor, t_Wild, t_Wild));
+addTileRotated("OffgridTiles_02.png", 4, new Array(tFloor, tFloor, tFloor, t_Wild));
+addTileRotated("OffgridTiles_03.png", 2, new Array(t_Wild, tFloor, t_Wild, tFloor));
+addTileRotated("OffgridTiles_04.png", 4, new Array(t_Wild, tFloor, tFloor, t_Wild));
 //shallow water w/ null
-addTileRotated("OffgridTiles_16.png", 4, new Array(tWild, tWater, tWild, tWild));
-addTileRotated("OffgridTiles_17.png", 4, new Array(tWater, tWater, tWater, tWild));
-addTileRotated("OffgridTiles_18.png", 2, new Array(tWild, tWater, tWild, tWater));
-addTileRotated("OffgridTiles_19.png", 4, new Array(tWild, tWater, tWater, tWild));
+addTileRotated("OffgridTiles_15.png", 1, new Array(tWater, tWater, tWater, tWater));
+addTileRotated("OffgridTiles_16.png", 4, new Array(t_Wild, tWater, t_Wild, t_Wild));
+addTileRotated("OffgridTiles_17.png", 4, new Array(tWater, tWater, tWater, t_Wild));
+addTileRotated("OffgridTiles_18.png", 2, new Array(t_Wild, tWater, t_Wild, tWater));
+addTileRotated("OffgridTiles_19.png", 4, new Array(t_Wild, tWater, tWater, t_Wild));
 //deep water w/ null
-addTileRotated("OffgridTiles_12.png", 4, new Array(tWild, tDeep, tWild, tWild));
-addTileRotated("OffgridTiles_13.png", 4, new Array(tDeep, tDeep, tDeep, tWild));
-addTileRotated("OffgridTiles_14.png", 2, new Array(tWild, tDeep, tWild, tDeep));
-addTileRotated("OffgridTiles_15.png", 4, new Array(tWild, tDeep, tDeep, tWild));
+addTileRotated("OffgridTiles_10.png", 1, new Array(tDeepW, tDeepW, tDeepW, tDeepW));
+addTileRotated("OffgridTiles_11.png", 4, new Array(t_Wild, tDeepW, t_Wild, t_Wild));
+addTileRotated("OffgridTiles_12.png", 4, new Array(tDeepW, tDeepW, tDeepW, t_Wild));
+addTileRotated("OffgridTiles_13.png", 2, new Array(t_Wild, tDeepW, t_Wild, tDeepW));
+addTileRotated("OffgridTiles_14.png", 4, new Array(t_Wild, tDeepW, tDeepW, t_Wild));
 //forest w/ null
-addTileRotated("OffgridTiles_08.png", 4, new Array(tWild, tWall, tWild, tWild));
-addTileRotated("OffgridTiles_09.png", 4, new Array(tWall, tWall, tWall, tWild));
-addTileRotated("OffgridTiles_10.png", 2, new Array(tWild, tWall, tWild, tWall));
-addTileRotated("OffgridTiles_11.png", 4, new Array(tWild, tWall, tWall, tWild));
+addTileRotated("OffgridTiles_05.png", 1, new Array(tWalls, tWalls, tWalls, tWalls));
+addTileRotated("OffgridTiles_06.png", 4, new Array(t_Wild, tWalls, t_Wild, t_Wild));
+addTileRotated("OffgridTiles_07.png", 4, new Array(tWalls, tWalls, tWalls, t_Wild));
+addTileRotated("OffgridTiles_08.png", 2, new Array(t_Wild, tWalls, t_Wild, tWalls));
+addTileRotated("OffgridTiles_09.png", 4, new Array(t_Wild, tWalls, tWalls, t_Wild));
+//mud w/ null
+addTileRotated("OffgridTiles_20.png", 1, new Array(tMuddy, tMuddy, tMuddy, tMuddy));
+addTileRotated("OffgridTiles_21.png", 4, new Array(t_Wild, tMuddy, t_Wild, t_Wild));
+addTileRotated("OffgridTiles_22.png", 4, new Array(tMuddy, tMuddy, tMuddy, t_Wild));
+addTileRotated("OffgridTiles_23.png", 2, new Array(t_Wild, tMuddy, t_Wild, tMuddy));
+addTileRotated("OffgridTiles_24.png", 4, new Array(t_Wild, tMuddy, tMuddy, t_Wild));
 
 //tile Overlay pieces
 //Plains and Deep Water w/ Cliff Borders
-addDetailedTileRotated("OffgridTiles_20.png", 4, new Array(tFloor, tDeep, tFloor, tWild));
-addDetailedTileRotated("OffgridTiles_21.png", 4, new Array(tDeep, tWild, tDeep, tFloor));
-addDetailedTileRotated("OffgridTiles_22.png", 2, new Array(tFloor, tDeep, tFloor, tDeep));
-addDetailedTileRotated("OffgridTiles_23.png", 4, new Array(tFloor, tDeep, tDeep, tFloor));
+//this broke, need to fix when I have more time
+// addDetailedTileRotated("OffgridTiles_27.png", 4, new Array(tFloor, tDeepW, tFloor, t_Wild));
+// addDetailedTileRotated("OffgridTiles_26.png", 4, new Array(tDeepW, t_Wild, tDeepW, tFloor));
+// addDetailedTileRotated("OffgridTiles_28.png", 2, new Array(tFloor, tDeepW, tFloor, tDeepW));
+// addDetailedTileRotated("OffgridTiles_29.png", 4, new Array(tFloor, tDeepW, tDeepW, tFloor));
 
-addDetailedTileRotated("OffgridTiles_24.png", 4, new Array(tWild, tWild, tDeep, tFloor));
-addDetailedTileRotated("OffgridTiles_25.png", 4, new Array(tWild, tWild, tFloor, tDeep));
+// addDetailedTileRotated("OffgridTiles_30.png", 4, new Array(t_Wild, t_Wild, tDeepW, tFloor));
+// addDetailedTileRotated("OffgridTiles_25.png", 4, new Array(t_Wild, t_Wild, tFloor, tDeepW));
 
 
 //plains w/ forest

@@ -11,7 +11,7 @@ class Offgrid{
         this.displayTiles = [tilesWide + 1 * tilesTall + 1];
         for(var x = 0; x < tilesWide; x++){
             for(var y = 0; y < tilesTall; y++){
-                this.setDataTile(x, y, tWall);
+                this.setDataTile(x, y, tWalls);
             }
         }
 
@@ -51,7 +51,7 @@ class Offgrid{
             if(mouseEvent.detail <= 1){
                 this.setDataTile(tileX, tileY, paintID);
             }else if(mouseEvent.detail > 1){
-                this.setDataTile(tileX, tileY, tWild);
+                this.setDataTile(tileX, tileY, t_Wild);
             }
             this.drawCanvas();
     }
@@ -178,7 +178,7 @@ class Offgrid{
                         if(e == tileLayers[i]){
                             layerPattern.push(e);
                         }else{
-                            layerPattern.push(tWild);
+                            layerPattern.push(t_Wild);
                         }
                     });
                     tileDict.forEach(e => {
@@ -196,7 +196,7 @@ class Offgrid{
     }
 }
 
-var grid = new Offgrid(8, 5, tFloor);
+var grid = new Offgrid(8, 5, tWalls);
 console.log(grid);
 grid.drawCanvas();
 
@@ -204,7 +204,7 @@ grid.drawCanvas();
 document.getElementById("newMap").addEventListener("click", e => {
     var width = parseInt(document.getElementById("width").value);
     var height = parseInt(document.getElementById("height").value);
-    grid = new Offgrid(width, height, tFloor);
+    grid = new Offgrid(width, height, tWalls);
     console.log(grid);
     grid.drawCanvas();
 });
@@ -239,16 +239,20 @@ var palette1 = tileDict[0].image;
 palette1.addEventListener("click", e => paletteClick(tFloor, palette1));
 document.getElementById("palette").appendChild(palette1);
 
-var palette2 = tileDict[1].image;
+var palette2 = tileDict[15].image;
 palette2.addEventListener("click", e => paletteClick(tWater, palette2));
 document.getElementById("palette").appendChild(palette2);
 
-var palette3 = tileDict[2].image;
-palette3.addEventListener("click", e => paletteClick(tDeep, palette3));
+var palette3 = tileDict[30].image;
+palette3.addEventListener("click", e => paletteClick(tDeepW, palette3));
 document.getElementById("palette").appendChild(palette3);
 
-var palette4 = tileDict[3].image;
-palette4.addEventListener("click", e => paletteClick(tWall, palette4));
+var palette4 = tileDict[45].image;
+palette4.addEventListener("click", e => paletteClick(tWalls, palette4));
 document.getElementById("palette").appendChild(palette4);
+
+var palette5 = tileDict[60].image;
+palette5.addEventListener("click", e => paletteClick(tMuddy, palette5));
+document.getElementById("palette").appendChild(palette5);
 
 paletteClick(tFloor, palette1);
