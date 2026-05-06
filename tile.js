@@ -125,14 +125,15 @@ addTileRotated("OffgridTiles_24.png", 4, new Array(t_Wild, tMuddy, tMuddy, t_Wil
 
 //tile Overlay pieces
 //Plains and Deep Water w/ Cliff Borders
-//this broke, need to fix when I have more time
-// addDetailedTileRotated("OffgridTiles_27.png", 4, new Array(tFloor, tDeepW, tFloor, t_Wild));
-// addDetailedTileRotated("OffgridTiles_26.png", 4, new Array(tDeepW, t_Wild, tDeepW, tFloor));
-// addDetailedTileRotated("OffgridTiles_28.png", 2, new Array(tFloor, tDeepW, tFloor, tDeepW));
-// addDetailedTileRotated("OffgridTiles_29.png", 4, new Array(tFloor, tDeepW, tDeepW, tFloor));
+//more specific needs to go first; otherwise less specifics take priority
+addDetailedTileRotated("OffgridTiles_27.png", 2, new Array(tFloor, tDeepW, tFloor, tDeepW));
 
-// addDetailedTileRotated("OffgridTiles_30.png", 4, new Array(t_Wild, t_Wild, tDeepW, tFloor));
-// addDetailedTileRotated("OffgridTiles_25.png", 4, new Array(t_Wild, t_Wild, tFloor, tDeepW));
+addDetailedTileRotated("OffgridTiles_25.png", 4, new Array(tFloor, tDeepW, tFloor, t_Wild));
+addDetailedTileRotated("OffgridTiles_26.png", 4, new Array(tDeepW, t_Wild, tDeepW, tFloor));
+addDetailedTileRotated("OffgridTiles_28.png", 4, new Array(tFloor, tDeepW, tDeepW, tFloor));
+
+addDetailedTileRotated("OffgridTiles_29.png", 4, new Array(t_Wild, t_Wild, tFloor, tDeepW));
+addDetailedTileRotated("OffgridTiles_30.png", 4, new Array(t_Wild, t_Wild, tDeepW, tFloor));
 
 
 //plains w/ forest
