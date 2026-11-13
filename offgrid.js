@@ -227,6 +227,14 @@ document.getElementById("saveMap").addEventListener("click", e => {
     document.getElementById("mapString").value = mapString;
 });
 
+//setting up the border tile dropdown
+document.getElementById("borderTile").addEventListener("change", e => {
+    console.log(e.target.value);
+    grid.borderID = e.target.value;
+
+    grid.drawCanvas();
+});
+
 //setting up the palette
 function paletteClick(value, clickedNode){
     paintID = value;
@@ -235,13 +243,8 @@ function paletteClick(value, clickedNode){
     });
     clickedNode.setAttribute("class", "selected");
 }
-//setting up the border tile dropdown
-document.getElementById("borderTile").addEventListener("change", e => {
-    console.log(e.target.value);
-    grid.borderID = e.target.value;
-});
 
-function createPaletteElement(imageIndex, imageValue){
+function createPaletteElement(imageIndex, imageValue, tileName){
     var palette = tileDict[imageIndex].image;
     palette.value = imageValue;
     palette.addEventListener("click", e => paletteClick(e.target.value, e.target));
@@ -252,44 +255,21 @@ function createPaletteElement(imageIndex, imageValue){
     border1.appendChild(tileDict[imageIndex].image.cloneNode(false));
     
     var fallbackText = document.createElement("span");
-    // fallbackText.innerText = tileDict[imageIndex].image.name;
-    fallbackText.innerText = "Fallback";
+    fallbackText.innerText = tileName;
+    //fallbackText.innerText = "Fallback";
 
     border1.appendChild(fallbackText);
     border1.value = imageValue;
     document.getElementById("borderTile").appendChild(border1);
 }
 
-// var palette1 = tileDict[0].image;
-// palette1.addEventListener("click", e => paletteClick(tFloor, palette1));
-// document.getElementById("palette").appendChild(palette1);
-// var border1 = document.createElement("option");
-// border1.appendChild(tileDict[0].image);
-// border1.appendChild(document.createElement("span"));
-// border1.value = 0;
-// document.getElementById("borderTile").appendChild(border1);
-createPaletteElement(0, tFloor);
+createPaletteElement(0, tFloor, "Grass");
+createPaletteElement(15, tWater, "Shallow Water");
+createPaletteElement(30, tDeepW, "Deep Water");
+createPaletteElement(45, tWalls, "Forest");
+createPaletteElement(60, tMuddy, "Mud");
 
-
-// var palette2 = tileDict[15].image;
-// palette2.addEventListener("click", e => paletteClick(tWater, palette2));
-// document.getElementById("palette").appendChild(palette2);
-createPaletteElement(15, tWater);
-
-// var palette3 = tileDict[30].image;
-// palette3.addEventListener("click", e => paletteClick(tDeepW, palette3));
-// document.getElementById("palette").appendChild(palette3);
-createPaletteElement(30, tDeepW);
-
-// var palette4 = tileDict[45].image;
-// palette4.addEventListener("click", e => paletteClick(tWalls, palette4));
-// document.getElementById("palette").appendChild(palette4);
-createPaletteElement(45, tWalls);
-
-// var palette5 = tileDict[60].image;
-// palette5.addEventListener("click", e => paletteClick(tMuddy, palette5));
-// document.getElementById("palette").appendChild(palette5);
-createPaletteElement(60, tMuddy);
-
+//setup default values of the palette/user input
 var p1 = document.getElementById("palette").childNodes[0];
 paletteClick(p1.value, p1);
+document.getElementById("borderTile").dispatchEvent(new Event('change', { bubbles: true}));
