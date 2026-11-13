@@ -20,14 +20,21 @@ main {
 }
 
 
-.image-select,
-.image-select::picker(select) {
+  select,
+  ::picker(select) {
     appearance: base-select;
-}
-
-.image-select option {
+    font-family: serif;
+  }
+  option {
     display: flex;
     align-items: center;
     gap: 8px;
     padding: 6px 10px;
-}
+  }
+
+  option img,
+  selectedcontent img {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+  }

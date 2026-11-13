@@ -249,18 +249,21 @@ function createPaletteElement(imageIndex, imageValue, tileName){
     palette.value = imageValue;
     palette.addEventListener("click", e => paletteClick(e.target.value, e.target));
     document.getElementById("palette").appendChild(palette);
-    console.log(palette);
+    // console.log(palette);
 
-    var border1 = document.createElement("option");
-    border1.appendChild(tileDict[imageIndex].image.cloneNode(false));
+    var borderTile = document.createElement("option");
+    borderTile.appendChild(tileDict[imageIndex].image.cloneNode(false));
+    // var url = `background-image:url(${tileDict[imageIndex].image.src})`;
+    // borderTile.style = url;
     
     var fallbackText = document.createElement("span");
     fallbackText.innerText = tileName;
     //fallbackText.innerText = "Fallback";
 
-    border1.appendChild(fallbackText);
-    border1.value = imageValue;
-    document.getElementById("borderTile").appendChild(border1);
+    borderTile.appendChild(fallbackText);
+    borderTile.value = imageValue;
+    document.getElementById("borderTile").appendChild(borderTile);
+    console.log(borderTile);
 }
 
 createPaletteElement(0, tFloor, "Grass");
