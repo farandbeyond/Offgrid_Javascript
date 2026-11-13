@@ -235,24 +235,61 @@ function paletteClick(value, clickedNode){
     });
     clickedNode.setAttribute("class", "selected");
 }
-var palette1 = tileDict[0].image;
-palette1.addEventListener("click", e => paletteClick(tFloor, palette1));
-document.getElementById("palette").appendChild(palette1);
+//setting up the border tile dropdown
+document.getElementById("borderTile").addEventListener("change", e => {
+    console.log(e.target.value);
+    grid.borderID = e.target.value;
+});
 
-var palette2 = tileDict[15].image;
-palette2.addEventListener("click", e => paletteClick(tWater, palette2));
-document.getElementById("palette").appendChild(palette2);
+function createPaletteElement(imageIndex, imageValue){
+    var palette = tileDict[imageIndex].image;
+    palette.value = imageValue;
+    palette.addEventListener("click", e => paletteClick(e.target.value, e.target));
+    document.getElementById("palette").appendChild(palette);
+    console.log(palette);
 
-var palette3 = tileDict[30].image;
-palette3.addEventListener("click", e => paletteClick(tDeepW, palette3));
-document.getElementById("palette").appendChild(palette3);
+    var border1 = document.createElement("option");
+    border1.appendChild(tileDict[imageIndex].image.cloneNode(false));
+    
+    var fallbackText = document.createElement("span");
+    // fallbackText.innerText = tileDict[imageIndex].image.name;
+    fallbackText.innerText = "Fallback";
 
-var palette4 = tileDict[45].image;
-palette4.addEventListener("click", e => paletteClick(tWalls, palette4));
-document.getElementById("palette").appendChild(palette4);
+    border1.appendChild(fallbackText);
+    border1.value = imageValue;
+    document.getElementById("borderTile").appendChild(border1);
+}
 
-var palette5 = tileDict[60].image;
-palette5.addEventListener("click", e => paletteClick(tMuddy, palette5));
-document.getElementById("palette").appendChild(palette5);
+// var palette1 = tileDict[0].image;
+// palette1.addEventListener("click", e => paletteClick(tFloor, palette1));
+// document.getElementById("palette").appendChild(palette1);
+// var border1 = document.createElement("option");
+// border1.appendChild(tileDict[0].image);
+// border1.appendChild(document.createElement("span"));
+// border1.value = 0;
+// document.getElementById("borderTile").appendChild(border1);
+createPaletteElement(0, tFloor);
 
-paletteClick(tFloor, palette1);
+
+// var palette2 = tileDict[15].image;
+// palette2.addEventListener("click", e => paletteClick(tWater, palette2));
+// document.getElementById("palette").appendChild(palette2);
+createPaletteElement(15, tWater);
+
+// var palette3 = tileDict[30].image;
+// palette3.addEventListener("click", e => paletteClick(tDeepW, palette3));
+// document.getElementById("palette").appendChild(palette3);
+createPaletteElement(30, tDeepW);
+
+// var palette4 = tileDict[45].image;
+// palette4.addEventListener("click", e => paletteClick(tWalls, palette4));
+// document.getElementById("palette").appendChild(palette4);
+createPaletteElement(45, tWalls);
+
+// var palette5 = tileDict[60].image;
+// palette5.addEventListener("click", e => paletteClick(tMuddy, palette5));
+// document.getElementById("palette").appendChild(palette5);
+createPaletteElement(60, tMuddy);
+
+var p1 = document.getElementById("palette").childNodes[0];
+paletteClick(p1.value, p1);
