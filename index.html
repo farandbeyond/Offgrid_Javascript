@@ -4,13 +4,14 @@
     </head>
     <body>
         <main>
-            <div id="controls" class="controls">
-                <div class="inline">
-                    <input type="text" id="width" class="width" pattern="[0-9]"></input>
-                    <input type="text"  id="height" class="height" pattern="[0-9]"></input>
-                    <button id="newMap">Generate New Map</button>
+            <div id="controls" class="controls flex-box">
+                <div class="linkedControl">
+                    <input type="text" id="width" class="sizeInput width" inputmode="[0-9]+"></input>
+                    <input type="text"  id="height" class="sizeInput height" pattern="[0-9]+"></input>
+                    <!-- <button id="newMap">Generate New Map</button> -->
+                     <input type="submit" id="newMap" value="Generate New Map">
                 </div>
-                <div class="inline">
+                <div class="linkedControl">
                     <textarea id="mapString"></textarea>
                     <div class="inline">
                         <button id="loadMap">Load from String</button>
@@ -18,18 +19,18 @@
                     </div>
                 </div>
             </div>
-            
-            <canvas id="mainCanvas" class="mainCanvas"></canvas>
-            <div class="inline">
-                <p>Border Tile: </p>
-                <select name="Border_Tile" class="image-select" id="borderTile">
-                      <button>
-                        <selectedcontent></selectedcontent>
-                    </button>
-                </select>
+            <div class="flex-box">
+                <canvas id="mainCanvas" class="mainCanvas"></canvas>
+                <div class="palette">
+                    <p>Border Tile: </p>
+                    <select name="Border_Tile" class="image-select" id="borderTile">
+                        <button>
+                            <selectedcontent></selectedcontent>
+                        </button>
+                    </select>
 
-                <div id="palette" class="palette"></div>
-
+                    <div id="tilePalette"></div>
+                </div>
             </div>
             
         </main>

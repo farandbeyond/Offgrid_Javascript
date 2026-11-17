@@ -36,15 +36,36 @@ class Offgrid{
         // canvas.scrollHeight = tilesTall * tileSize;
     }
 
-    placeTile(mouseEvent){
+    scaleMouseClick(mouseClickX, mouseClickY){
+            var clickX = mouseClickX;
+            var clickY = mouseClickY;
+
+            var canvas = document.getElementById("mainCanvas");
+
+            var scaleX = canvas.scrollWidth / canvas.width;
+            var scaleY = canvas.scrollHeight / canvas.height;
+
+            clickX /= scaleX;
+            clickY /= scaleY;
+
+            //invert Y, so it visually matches our click (top Left is 0/0)
+            clickY = canvas.height - clickY;
 
             //since we are modifying the offset grid, add half the tilesize
-            var clickX = mouseEvent.offsetX - tileSize / 2;
-            var clickY = (document.getElementById("mainCanvas").height - mouseEvent.offsetY) - tileSize / 2;
+            clickX -= tileSize / 2;
+            clickY -= tileSize / 2;
 
+            return [clickX, clickY];
+    }
+
+    placeTile(mouseEvent){
+            //scale the value, in case the css width doesnt match our canvas absolute width
+            var scaledClick = this.scaleMouseClick(mouseEvent.offsetX, mouseEvent.offsetY);
             
-            var tileX = Math.floor(clickX / tileSize);
-            var tileY = Math.floor(clickY / tileSize);
+            //convert to int for grid coords
+            var tileX = Math.floor(scaledClick[0] / (tileSize));
+            var tileY = Math.floor(scaledClick[1] / (tileSize));
+            // console.log(`${tileX}/${tileY}`);
 
 
             //this.setDisplayTile(tileX, tileY, this.getDisplayTile(tileX, tileY) + 1);
@@ -238,7 +259,7 @@ document.getElementById("borderTile").addEventListener("change", e => {
 //setting up the palette
 function paletteClick(value, clickedNode){
     paintID = value;
-    document.getElementById("palette").childNodes.forEach(node => {
+    document.getElementById("tilePalette").childNodes.forEach(node => {
         node.setAttribute("class", "");
     });
     clickedNode.setAttribute("class", "selected");
@@ -248,7 +269,7 @@ function createPaletteElement(imageIndex, imageValue, tileName){
     var palette = tileDict[imageIndex].image;
     palette.value = imageValue;
     palette.addEventListener("click", e => paletteClick(e.target.value, e.target));
-    document.getElementById("palette").appendChild(palette);
+    document.getElementById("tilePalette").appendChild(palette);
     // console.log(palette);
 
     var borderTile = document.createElement("option");
@@ -273,6 +294,6 @@ createPaletteElement(45, tWalls, "Forest");
 createPaletteElement(60, tMuddy, "Mud");
 
 //setup default values of the palette/user input
-var p1 = document.getElementById("palette").childNodes[0];
+var p1 = document.getElementById("tilePalette").childNodes[0];
 paletteClick(p1.value, p1);
 document.getElementById("borderTile").dispatchEvent(new Event('change', { bubbles: true}));
